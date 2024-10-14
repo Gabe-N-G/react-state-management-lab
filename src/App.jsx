@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
 // Create a new state variable named team and set the initial state to an empty array [].
 // Create a new state variable named money and set the initial state to 100.
@@ -106,6 +104,7 @@ function App() {
     console.log(i)
     console.log(e)
     setTeam(team.filter((member, index) => index !== i))
+    //member is there as a placeholder, it is not used but you can't keep it blank to move onto index.
     setMoney(money + e.price)
     setTotalStrength(totalStrength + e.strength)
     setTotalAgility(totalAgility + e.agility)
