@@ -12,6 +12,10 @@ function App() {
 
   const [team,setTeam] = useState([])
   const [money,setMoney] = useState(100)
+  const [totalStrength, setTotalStrength] = useState(0)
+  const [totalAgility, setTotalAgility] = useState(0)
+
+
   const [zombieFighters, setZombieFighters] = useState(
     [
       {
@@ -91,20 +95,35 @@ function App() {
     if (e.price < money){
       setTeam([...team, e])
       setMoney(money -  e.price)
+      setTotalStrength(totalStrength + e.strength)
+      setTotalAgility(totalAgility + e.agility)
     } else {
       console.log('CAPITALISM WINS AGAIN')
     }
   }
+
+  const handleRemoveFighter = (e,i) => {
+    console.log(i)
+    console.log(e)
+    setTeam(team.filter((member, index) => index !== i))
+    setMoney(money + e.price)
+    setTotalStrength(totalStrength + e.strength)
+    setTotalAgility(totalAgility + e.agility)
+  }
+
 
   return (
     // Display the current value of money in the UI.
     
     <>
       <h2>Money: {money}</h2>
+      <h2>Team Strength: {totalStrength}</h2>
+      <h2>Team Agility: {totalAgility}</h2>
 
+      
       {
         team.length ? 
-          <ul>Your team:
+          <ul>Your team: 
           {team.map((zf, i)=>
             <div key={i}>
               <img src={zf.img} alt={zf.name}></img>
@@ -112,12 +131,15 @@ function App() {
               <li>price:{zf.price}</li>
               <li>strength: {zf.strength}</li>
               <li>agility: {zf.agility}</li>
+              <button onClick={() => handleRemoveFighter(zf,i)}>Remove Fighter</button>
             </div>
           )}
-          </ul>  
+          </ul>
       : 
         "Buy more humans"
       }
+
+      
 
       <ul>
         {zombieFighters.map((zf, i)=>
