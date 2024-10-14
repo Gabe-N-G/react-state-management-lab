@@ -11,7 +11,7 @@ function App() {
 // Create a new state variable named zombieFighters and set the initial state to the following array of objects:
 
   const [team,setTeam] = useState([])
-  const [money,setMoney] = useState(0)
+  const [money,setMoney] = useState(100)
   const [zombieFighters, setZombieFighters] = useState(
     [
       {
@@ -87,21 +87,34 @@ function App() {
   ]
 )
 
+  const handleAddFighter = e =>{
+    if (e.price < money){
+      setTeam([...team, e])
+      setMoney(money -  e.price)
+    } else {
+      console.log('CAPITALISM WINS AGAIN')
+    }
+  }
+
   return (
-    // Display the list of zombieFighters by mapping the array into the UI of App.jsx. (We’ve provided some helpful CSS assuming you use a ul and lis)
+    // Display the current value of money in the UI.
     
-    <ul>
-      {zombieFighters.map((zf)=>
-        <>
-        <li><img src={zf.img} alt={zf.name}></img>
-        <li>name: {zf.name}</li>
-        <li>price:{zf.price}</li>
-        <li>strength: {zf.strength}</li>
-        <li>agility: {zf.agility}</li>
-        </li>
-        </>
-      )}
-    </ul>
+    <>
+      <h2>Money: {money}</h2>
+
+      <ul>
+        {zombieFighters.map((zf, i)=>
+          <div key={i}>
+            <img src={zf.img} alt={zf.name}></img>
+            <li>name: {zf.name}</li>
+            <li>price:{zf.price}</li>
+            <li>strength: {zf.strength}</li>
+            <li>agility: {zf.agility}</li>
+            <button onClick={() => handleAddFighter(zf)}>Add</button>
+          </div>
+        )}
+      </ul>
+    </>
   );
 }
 
