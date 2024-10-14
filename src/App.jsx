@@ -102,6 +102,23 @@ function App() {
     <>
       <h2>Money: {money}</h2>
 
+      {
+        team.length ? 
+          <ul>Your team:
+          {team.map((zf, i)=>
+            <div key={i}>
+              <img src={zf.img} alt={zf.name}></img>
+              <li>name: {zf.name}</li>
+              <li>price:{zf.price}</li>
+              <li>strength: {zf.strength}</li>
+              <li>agility: {zf.agility}</li>
+            </div>
+          )}
+          </ul>  
+      : 
+        "Buy more humans"
+      }
+
       <ul>
         {zombieFighters.map((zf, i)=>
           <div key={i}>
